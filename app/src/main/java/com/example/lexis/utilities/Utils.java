@@ -42,6 +42,9 @@ import java.util.regex.Pattern;
 
 public class Utils {
 
+    static {
+        System.loadLibrary("lib");
+    }
     private static final String TAG = "Utils";
     private static final int MINUTE_STRING_LENGTH = 5;
     private static final int MILLIS_PER_HOUR = 3600000;
@@ -161,58 +164,36 @@ public class Utils {
     /*
     Update the studied languages of the logged-in user.
     */
-    public static void setCurrentStudiedLanguages(List<String> languages) {
-        ParseUser user = ParseUser.getCurrentUser();
-        if (user == null) {
-            Log.e(TAG, "Error setting studied languages");
-            return;
-        }
-
-        user.put("studyingLanguages", languages);
-        user.saveInBackground(e -> {
-            if (e != null) {
-                Log.e(TAG, "Error setting studied languages", e);
+        public static void setCurrentStudiedLanguages(List<String> languages) {
+            ParseUser user = ParseUser.getCurrentUser();
+            if (user == null) {
+                Log.e(TAG, "Error setting studied languages");
+                return;
             }
-            Log.i(TAG, "Successfully updated studied languages");
-        });
-    }
+
+            user.put("studyingLanguages", languages);
+            user.saveInBackground(e -> {
+                if (e != null) {
+                    Log.e(TAG, "Error setting studied languages", e);
+                }
+                Log.i(TAG, "Successfully updated studied languages");
+            });
+        }
 
     /*
     Return the full name of the language with the given ISO language code.
     */
-    public static String getFullLanguage(String code) {
-        Map<String, String> languageCodes = new HashMap<String, String>() {{
-            put("fr", "French");
-            put("es", "Spanish");
-            put("de", "German");
-            put("tr", "Turkish");
-        }};
-
-        return languageCodes.get(code);
-    }
+    public static native String getFullLanguage(String code);
 
     /*
     Return the ISO language code of the language with the spinner text.
     */
-    public static String getLanguageCode(String spinnerText) {
-        Map<String, String> languageCodes = new HashMap<String, String>() {{
-            put("French", "fr");
-            put("Spanish", "es");
-            put("German", "de");
-            put("Turkish", "tr");
-        }};
-
-        int index = spinnerText.indexOf(' ');
-        String language = spinnerText.substring(index + 1);
-        return languageCodes.get(language);
-    }
+    public static native String getLanguageCode(String spinnerText);
 
     /*
     Return the appropriate spinner text with flag and full language name the given ISO language code.
     */
-    public static String getSpinnerText(String code) {
-        return getFlagEmoji(code) + " " + getFullLanguage(code);
-    }
+    public static  native String getSpinnerText(String code);
 
     /*
     Convert a list of ISO language codes into a list appropriate for displaying in a spinner.
@@ -228,22 +209,7 @@ public class Utils {
     /*
     Return the flag emoji associated with the given ISO language code.
     */
-    public static String getFlagEmoji(String code) {
-        switch (code) {
-            case "de":
-                return "🇩🇪";
-            case "fr":
-                return "🇫🇷";
-            case "tr":
-                return "🇹🇷";
-            case "es":
-                return "🇪🇸";
-            case "en":
-                return "🇺🇸";
-            default:
-                return "";
-        }
-    }
+    public static native String getFlagEmoji(String code);
 
     /*
     Return the appropriate error message for the code in the given exception; return the default
@@ -397,24 +363,7 @@ public class Utils {
     /*
     Convert the provided string representing a time into milliseconds.
     */
-    public static long timerStringToMillis(String time) {
-        boolean hasHour = time.length() > MINUTE_STRING_LENGTH;
-
-        // construct date object from given time string
-        String myDate = hasHour ? "1970/01/01 " : "1970/01/01 0:";
-        myDate += time;
-
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd H:mm:ss", Locale.US);
-        sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
-        Date date;
-        try {
-            date = sdf.parse(myDate);
-            return date.getTime();
-        } catch (java.text.ParseException e) {
-            e.printStackTrace();
-        }
-        return 0;
-    }
+    public static native long timerStringToMillis(String timeString);
 
     /*
     Convert the provided milliseconds into a displayable timer string.

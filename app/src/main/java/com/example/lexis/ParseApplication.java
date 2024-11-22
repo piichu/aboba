@@ -25,12 +25,17 @@ public class ParseApplication extends Application {
         super.onCreate();
 
         ParseObject.registerSubclass(Word.class);
-        Parse.initialize(new Parse.Configuration.Builder(this)
+        /*Parse.initialize(new Parse.Configuration.Builder(this)
                 .applicationId("123")
                 .server("http://10.0.2.2:1337/parse/")
                 .build()
+        );*/
+        Parse.initialize(new Parse.Configuration.Builder(this)
+                .applicationId("TyjXjJllQX2ULsbiv8flIXpT6VPPe9NPLmT9Roes")
+                .clientKey("VxkwkHkx6C0tK9uSkX70iEGsTlPNPPeVUTb6LeoW")
+                .server("https://pg-app-48a0yanbz67l1qexzci3ifcguvu366.scalabl.cloud/1/")
+                .build()
         );
-
         DrawerImageLoader.Companion.init(new DrawerImageLoader.IDrawerImageLoader() {
             @Override
             public void set(@NotNull ImageView imageView, @NotNull Uri uri, @NotNull Drawable drawable, @Nullable String s) {

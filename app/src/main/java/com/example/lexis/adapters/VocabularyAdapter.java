@@ -78,9 +78,6 @@ public class VocabularyAdapter extends RecyclerView.Adapter<VocabularyAdapter.Vo
         notifyDataSetChanged();
     }
 
-    /*
-    Delete word at given position from user's vocabulary.
-    */
     public void deleteWord(int position) {
         Word word = vocabulary.get(position);
         String targetWord = word.getTargetWord();
@@ -109,9 +106,6 @@ public class VocabularyAdapter extends RecyclerView.Adapter<VocabularyAdapter.Vo
             this.context=context;
         }
 
-        /*
-        Bind Word data into the ViewHolder.
-        */
         public void bind(Word word) {
             binding.tvTargetLanguage.setText(word.getTargetWord());
             binding.tvEnglish.setText(word.getEnglishWord());
@@ -137,9 +131,6 @@ public class VocabularyAdapter extends RecyclerView.Adapter<VocabularyAdapter.Vo
             });
         }
 
-        /*
-        Toggle whether the word is starred and save to Parse.
-        */
         private void toggleStarred(Word word) {
             word.toggleIsStarred();
             word.saveInBackground();
@@ -170,7 +161,6 @@ public class VocabularyAdapter extends RecyclerView.Adapter<VocabularyAdapter.Vo
                         InputStream inputStream = response.body().byteStream();
                         File tempFile = new File(context.getCacheDir(),"audio.wav");
 
-                        // Записываем InputStream в временный файл
                         try (FileOutputStream fos = new FileOutputStream(tempFile)) {
                             byte[] buffer = new byte[1024];
                             int bytesRead;
@@ -179,17 +169,15 @@ public class VocabularyAdapter extends RecyclerView.Adapter<VocabularyAdapter.Vo
                             }
                         }
 
-                        // Воспроизведение аудио с помощью MediaPlayer
                         MediaPlayer mediaPlayer = new MediaPlayer();
                         mediaPlayer.setDataSource(tempFile.getAbsolutePath());
                         mediaPlayer.prepare();
                         mediaPlayer.setVolume(1, 1);
                         mediaPlayer.start();
 
-                        // Удаление временного файла после воспроизведения
                         mediaPlayer.setOnCompletionListener(mp -> {
                             mp.release();
-                            tempFile.delete(); // Удаляем временный файл
+                            tempFile.delete();
                         });
                     } else {
                         Log.e("VoiceAPI", "Response failed: " + response.message());

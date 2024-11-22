@@ -30,19 +30,14 @@ public class MainActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         TranslateUtils.getTranslateService(this);
-        //TranslateUtils.getNLPService(this);
 
-        // set up tab navigation
         binding.bottomNavigation.setOnNavigationItemSelectedListener(item -> {
             switchToSelectedFragment(item);
             return true;
         });
-        binding.bottomNavigation.setSelectedItemId(R.id.action_home); // default tab is home
+        binding.bottomNavigation.setSelectedItemId(R.id.action_home);
     }
 
-    /*
-    Switch to the appropriate fragment selected through the bottom tab navigation.
-    */
     private void switchToSelectedFragment(MenuItem item) {
         final FragmentManager fragmentManager = getSupportFragmentManager();
         Fragment fragment = null;
@@ -75,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        return false; // need to return false so that control is passed down to fragments
+        return false;
     }
 
     @Override

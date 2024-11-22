@@ -56,9 +56,6 @@ public class SignupActivity extends AppCompatActivity {
         frameAnimation.start();
     }
 
-    /*
-    Set up toolbar with custom back button.
-    */
     private void setUpToolbar() {
         setSupportActionBar(binding.toolbar.getRoot());
         ActionBar actionBar = getSupportActionBar();
@@ -74,10 +71,6 @@ public class SignupActivity extends AppCompatActivity {
         binding.toolbar.getRoot().setNavigationOnClickListener(v -> onBackPressed());
     }
 
-    /*
-    Sign up a new user with the provided username, e-mail, password, and target language
-    to the Parse database.
-    */
     private void signUpUser(String username, String email, String password, String targetLanguage) {
         if (email.isEmpty()) {
             Toast.makeText(SignupActivity.this, "E-mail cannot be empty!", Toast.LENGTH_SHORT).show();
@@ -92,6 +85,7 @@ public class SignupActivity extends AppCompatActivity {
         List<String> allLanguages = new ArrayList<>();
         user.put("studyingLanguages", allLanguages);
 
+
         user.signUpInBackground(e -> {
             if (e != null) {
                 showErrorMessage(e);
@@ -103,17 +97,11 @@ public class SignupActivity extends AppCompatActivity {
         });
     }
 
-    /*
-    Display the error message from Parse to the user in a Toast.
-    */
     private void showErrorMessage(ParseException e) {
         String errorMessage = Utils.getUserErrorMessage(e, "Error with sign-up!");
         Toast.makeText(SignupActivity.this, errorMessage, Toast.LENGTH_SHORT).show();
     }
 
-    /*
-    Navigate to the login activity.
-    */
     private void goLoginActivity() {
         Intent i = new Intent(this, LoginActivity.class);
         startActivity(i);

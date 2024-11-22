@@ -17,7 +17,7 @@
     <string name="confirm_password_label">подтвердить пароль</string>
     <string name="change_password_label">изменить пароль</string>
     <string name="empty_vocabulary_prompt">Вы еще не изучили никаких слов!\n \nНажмите на выделенное слово в статье, чтобы узнать его значение и добавить его в свой словарный запас, или добавьте слово вручную, нажав кнопку с плюсом.</string>
-    <string name="answer_in_english_label">🇺k English</string>
+    <string name="answer_in_english_label">🇺🇸 English</string>
     <string name="practice_prompt">Как практикуемся?</string>
     <string name="start_practice_button_label">Погнали!</string>
     <string name="practice_spinner_label">Я хочу учить…</string>
@@ -56,4 +56,5 @@
     <string name="forgot_password">Забыл пароль?</string>
     <string name="forgot_password_title">Забыл пароль</string>
     <string name="reset_password_instructions">Введите адрес электронной почты, связанный с вашей учетной записью, и мы отправим вам ссылку для сброса пароля!</string>
+    <string name="answer_in_target_language_label">🇫🇷 Французский</string>
 </resources>

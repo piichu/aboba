@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/vocabulary_filter"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/dialog_background_shape_tablet"
+    android:padding="24dp">
+
+    <!-- Title -->
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="500dp"
+        android:layout_height="wrap_content"
+        android:text="@string/update_vocabulary_filters"
+        android:textColor="@color/black"
+        android:textSize="33sp"
+        android:textAlignment="center"
+        android:textStyle="bold"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintVertical_bias="0.2" />
+
+    <!-- Languages Label -->
+    <TextView
+        android:id="@+id/tvLanguages"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/languages"
+        android:textSize="24sp"
+        app:layout_constraintTop_toBottomOf="@id/tvTitle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="24dp" />
+
+    <!-- Language List -->
+    <LinearLayout
+        android:id="@+id/languageList"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@id/tvLanguages"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:paddingHorizontal="16dp"
+        android:layout_marginTop="16dp"/>
+
+    <!-- Select All Checkbox -->
+    <CheckBox
+        android:id="@+id/cbAll"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/all"
+        android:textSize="24sp"
+        android:textColor="@color/black"
+        app:layout_constraintTop_toTopOf="@id/languageList"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="16dp" />
+
+    <!-- Starred Words Label -->
+    <TextView
+        android:id="@+id/tvStarredWords"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/starred_words_label"
+        android:textSize="24sp"
+        app:layout_constraintTop_toBottomOf="@id/cbAll"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="30dp" />
+
+    <!-- Starred Only Checkbox -->
+    <CheckBox
+        android:id="@+id/cbStarredOnly"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/starred_words_only"
+        android:textSize="24sp"
+        android:textColor="@color/black"
+        app:layout_constraintTop_toBottomOf="@id/tvStarredWords"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp" />
+
+    <!-- Sorting Label -->
+    <TextView
+        android:id="@+id/tvSorting"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/sort_by"
+        android:textSize="24sp"
+        app:layout_constraintTop_toBottomOf="@id/cbStarredOnly"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="30dp" />
+
+    <!-- Radio Group for Sorting -->
+    <RadioGroup
+        android:id="@+id/radioGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@id/tvSorting"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp">
+
+        <RadioButton
+            android:id="@+id/radioAlphabetical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/alphabetically"
+            android:textSize="24sp"
+            android:paddingHorizontal="8dp" />
+
+        <RadioButton
+            android:id="@+id/radioCreatedAt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/date_added"
+            android:textSize="24sp"
+            android:paddingHorizontal="8dp" />
+    </RadioGroup>
+
+    <!-- Cancel Button -->
+    <Button
+        android:id="@+id/btnCancel"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Отмена"
+        android:textColor="@color/gray"
+        android:textSize="24sp"
+        android:background="@android:color/transparent"
+        app:layout_constraintTop_toBottomOf="@id/radioGroup"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/btnUpdate"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="8dp" />
+
+    <!-- Update Button -->
+    <Button
+        android:id="@+id/btnUpdate"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Обновить"
+        android:textColor="@color/tiffany_blue"
+        android:textSize="24sp"
+        android:background="@android:color/transparent"
+        app:layout_constraintTop_toBottomOf="@id/radioGroup"
+        app:layout_constraintStart_toEndOf="@id/btnCancel"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="8dp"  />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

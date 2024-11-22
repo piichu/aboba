@@ -69,15 +69,11 @@ public class PracticeFragment extends Fragment implements VocabularyFilterDialog
         setUpSearchBar();
     }
 
-    /*
-    Set up the recyclerView for displaying vocabulary.
-    */
     private void setUpRecyclerView() {
         adapter = new VocabularyAdapter(this, vocabulary);
         binding.rvVocabulary.setAdapter(adapter);
         binding.rvVocabulary.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        // set up pull to refresh
         binding.swipeContainer.setOnRefreshListener(() -> {
             adapter.clear();
             resetVocabularyFilters();
@@ -89,12 +85,10 @@ public class PracticeFragment extends Fragment implements VocabularyFilterDialog
                 R.color.orange_peel,
                 R.color.mellow_apricot);
 
-        // set up swipe left to delete
         SwipeDeleteCallback callback = new SwipeDeleteCallback(adapter);
         ItemTouchHelper touchHelper = new ItemTouchHelper(callback);
         touchHelper.attachToRecyclerView(binding.rvVocabulary);
 
-        // hide practice button if on last item so that user can see star / flag
         binding.rvVocabulary.addOnScrollListener(new RecyclerView.OnScrollListener(){
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
@@ -115,9 +109,6 @@ public class PracticeFragment extends Fragment implements VocabularyFilterDialog
         });
     }
 
-    /*
-    Set up the toolbar logo and button.
-    */
     private void setUpToolbar() {
         Utils.setLanguageLogo(binding.toolbar.ivLogo);
         binding.toolbar.ibFilter.setOnClickListener(v -> {
@@ -142,9 +133,6 @@ public class PracticeFragment extends Fragment implements VocabularyFilterDialog
         });
     }
 
-    /*
-    Set up button for navigating to practice session.
-    */
     private void setUpPracticeButton() {
         binding.btnPractice.setOnClickListener(v -> {
             AppCompatActivity activity = (AppCompatActivity) getActivity();
@@ -158,9 +146,6 @@ public class PracticeFragment extends Fragment implements VocabularyFilterDialog
         });
     }
 
-    /*
-    Set up the vocabulary search bar.
-    */
     private void setUpSearchBar() {
         binding.searchBar.setIconifiedByDefault(true);
         binding.searchBar.setOnClickListener(v -> binding.searchBar.onActionViewExpanded());
@@ -193,9 +178,6 @@ public class PracticeFragment extends Fragment implements VocabularyFilterDialog
         });
     }
 
-    /*
-    Fetch the user's vocabulary for the given languages.
-    */
     private void queryVocabulary() {
         showProgressBar();
         ParseQuery<Word> query = ParseQuery.getQuery(Word.class);
@@ -221,9 +203,6 @@ public class PracticeFragment extends Fragment implements VocabularyFilterDialog
         });
     }
 
-    /*
-    Search the user's vocabulary for the given query.
-    */
     private void searchVocabulary(String searchQuery) {
         showProgressBar();
         searchQuery = searchQuery.toLowerCase();
@@ -237,7 +216,6 @@ public class PracticeFragment extends Fragment implements VocabularyFilterDialog
         queries.add(targetWord);
         queries.add(englishWord);
 
-        // get words where either target word OR english word starts with search query
         ParseQuery<Word> query = ParseQuery.or(queries);
         query.include(Word.KEY_USER);
         query.whereEqualTo(Word.KEY_USER, ParseUser.getCurrentUser());
@@ -246,9 +224,9 @@ public class PracticeFragment extends Fragment implements VocabularyFilterDialog
             query.whereEqualTo(Word.KEY_STARRED, true);
         }
         if (sortBy == Sort.ALPHABETICALLY) {
-            query.addAscendingOrder(Word.KEY_TARGET_WORD_SEARCH); // sort alphabetically
+            query.addAscendingOrder(Word.KEY_TARGET_WORD_SEARCH);
         } else {
-            query.addDescendingOrder(Word.KEY_CREATED_AT); // sort by date added
+            query.addDescendingOrder(Word.KEY_CREATED_AT);
         }
         query.findInBackground((words, e) -> {
             if (e != null) {
@@ -262,9 +240,6 @@ public class PracticeFragment extends Fragment implements VocabularyFilterDialog
         });
     }
 
-    /*
-    Style the prompt shown when vocabulary is empty.
-    */
     private void styleEmptyVocabularyPrompt() {
         AppCompatActivity activity = (AppCompatActivity) getActivity();
         if (activity != null) {
@@ -278,9 +253,6 @@ public class PracticeFragment extends Fragment implements VocabularyFilterDialog
         }
     }
 
-    /*
-    Check if the user's vocabulary is empty, and display a prompting message if it is.
-    */
     private void checkSearchEmpty(List<Word> words) {
         binding.tvEmptyPrompt.setText(R.string.no_search_results);
         if (words.isEmpty()) {
@@ -292,9 +264,6 @@ public class PracticeFragment extends Fragment implements VocabularyFilterDialog
         }
     }
 
-    /*
-    Check if the user's vocabulary is empty, and display a prompting message if it is.
-    */
     public void checkVocabularyEmpty(List<Word> words) {
         styleEmptyVocabularyPrompt();
         if (words.isEmpty()) {
@@ -312,18 +281,12 @@ public class PracticeFragment extends Fragment implements VocabularyFilterDialog
         }
     }
 
-    /*
-    Reset vocabulary filters back to default values.
-    */
     private void resetVocabularyFilters() {
         selectedLanguages = new ArrayList<>(Utils.getCurrentStudiedLanguages());
         starredOnly = false;
         sortBy = Sort.DATE;
     }
 
-    /*
-    Called after vocabulary filter dialog is dismissed; filter vocabulary based on languages selected.
-    */
     @Override
     public void onFinishDialog(ArrayList<String> selectedLanguages, boolean starredOnly, Sort sortBy) {
         this.selectedLanguages = selectedLanguages;
@@ -334,17 +297,11 @@ public class PracticeFragment extends Fragment implements VocabularyFilterDialog
         queryVocabulary();
     }
 
-    /*
-    Called after new vocabulary dialog is dismissed; add new word to vocabulary.
-    */
     @Override
     public void onFinishDialog(String targetLanguage, String targetWord, String englishWord) {
         Utils.addWordToDatabase(targetLanguage, targetWord, englishWord, binding.rvVocabulary);
     }
 
-    /*
-    Helper functions to hide and show progress bar.
-    */
     public void showProgressBar() {
         binding.progressBar.setVisibility(View.VISIBLE);
     }

@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragments.PracticeIntroFragment">
+
+    <!-- Toolbar -->
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar_article"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- Prompt Text -->
+    <TextView
+        android:id="@+id/tvPrompt"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginHorizontal="16dp"
+        android:text="@string/practice_prompt"
+        android:textSize="30sp"
+        android:textColor="@color/black"
+        android:textAlignment="center"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Spinner Hint -->
+    <TextView
+        android:id="@+id/tvSpinnerHint"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="@string/practice_spinner_label"
+        android:textSize="16sp"
+        android:textColor="@color/black"
+        app:layout_constraintTop_toBottomOf="@id/tvPrompt"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Language Spinner -->
+    <Spinner
+        android:id="@+id/spinnerLanguage"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginHorizontal="16dp"
+        android:background="@drawable/spinner_background_shape"
+        app:layout_constraintTop_toBottomOf="@id/tvSpinnerHint"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Practice With Label -->
+    <TextView
+        android:id="@+id/tvPracticeWith"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="@string/practice_with"
+        android:textSize="16sp"
+        android:textColor="@color/black"
+        app:layout_constraintTop_toBottomOf="@id/spinnerLanguage"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Flashcards Button -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnFlashcards"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:text="@string/flashcards"
+        android:textSize="20sp"
+        android:textColor="@color/black"
+        app:backgroundTint="@color/white"
+        app:cornerRadius="10dp"
+        app:icon="@drawable/flashcards_icon"
+        app:iconGravity="top"
+        app:iconSize="30dp"
+        app:iconTint="@color/black"
+        app:strokeColor="@color/black"
+        app:strokeWidth="1dp"
+        app:layout_constraintTop_toBottomOf="@id/tvPracticeWith"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/btnWordSearch" />
+
+    <!-- Word Search Button -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnWordSearch"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="8dp"
+        android:text="@string/word_search"
+        android:textSize="20sp"
+        android:textColor="@color/black"
+        app:backgroundTint="@color/white"
+        app:cornerRadius="10dp"
+        app:icon="@drawable/word_search_icon"
+        app:iconGravity="top"
+        app:iconSize="30dp"
+        app:iconTint="@color/black"
+        app:strokeColor="@color/black"
+        app:strokeWidth="1dp"
+        app:layout_constraintTop_toBottomOf="@id/tvPracticeWith"
+        app:layout_constraintStart_toEndOf="@id/btnFlashcards"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Flashcard Options Section -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/flashcardOptions"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toBottomOf="@id/btnFlashcards"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <TextView
+            android:id="@+id/tvAnswerHint"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:text="@string/answer_hint"
+            android:textColor="@color/black"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <RadioGroup
+            android:id="@+id/radioGroup"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toBottomOf="@id/tvAnswerHint"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <RadioButton
+                android:id="@+id/radioTarget"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/answer_in_target_language_label"
+                android:textSize="16sp" />
+
+            <RadioButton
+                android:id="@+id/radioEnglish"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/answer_in_english_label"
+                android:textSize="16sp" />
+        </RadioGroup>
+
+        <TextView
+            android:id="@+id/tvStarredOnly"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/starred_words_label"
+            android:textColor="@color/black"
+            app:layout_constraintTop_toBottomOf="@id/radioGroup"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <CheckBox
+            android:id="@+id/cbStarredOnly"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/practice_starred_words_only"
+            android:textSize="16sp"
+            app:layout_constraintTop_toBottomOf="@id/tvStarredOnly"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <TextView
+            android:id="@+id/tvNumFlashcards"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/number_of_flashcards"
+            android:textColor="@color/black"
+            app:layout_constraintTop_toBottomOf="@id/cbStarredOnly"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <EditText
+            android:id="@+id/etQuestionLimit"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:inputType="number"
+            app:layout_constraintTop_toBottomOf="@id/tvNumFlashcards"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/tvQuestionLimit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            app:layout_constraintTop_toTopOf="@id/etQuestionLimit"
+            app:layout_constraintStart_toEndOf="@id/etQuestionLimit" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!-- Start Button -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnStart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/start_practice_button_label"
+        app:cornerRadius="10dp"
+        app:layout_constraintTop_toBottomOf="@id/flashcardOptions"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
